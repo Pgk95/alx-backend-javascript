@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
-class HolbertonCourse {
+export default class HolbertonCourse {
   constructor(name, length, students) {
     if (typeof name !== 'string' || typeof length !== 'number' || !Array.isArray(students)) {
-      throw new TypeError('invalid attribute types');
+      throw new TypeError('invalid input types');
     }
 
     this._name = name;
