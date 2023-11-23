@@ -1,7 +1,6 @@
 const assert = require('assert');
-function calculateNumber(a, b) {
-    return Math.round(a) + Math.round(b);
-}
+const calculateNumber = require('./0-calcul');
+const { describe, it } = require('mocha');
 
 describe('calculate numbers', () => {
     it('should return 4 when adding 2 and 2', () => {
