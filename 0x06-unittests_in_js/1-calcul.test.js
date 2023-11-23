@@ -2,7 +2,7 @@ const assert = require('assert');
 const calculateNumber = require('./1-calcul');
 const { describe, it } = require('mocha');
 
-describe('calculate numbers', () => {
+describe('calculate numbers()', () => {
     it('should return 3 when adding 1 and 2', () => {
         assert.equal(calculateNumber(1, 2, 'SUM'), 3);
     });
