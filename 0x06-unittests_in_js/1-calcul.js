@@ -4,7 +4,7 @@ function calculateNumber(a, b, type) {
     let numC = 0;
     switch (type) {
         case 'SUM':
-            numC = (numA + numB);
+            numC = numA + numB;
             break;
         case 'SUBTRACT':
             numC = numA - numB;
