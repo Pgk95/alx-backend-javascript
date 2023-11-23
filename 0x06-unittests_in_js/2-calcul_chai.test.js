@@ -1,24 +1,33 @@
-const {describe, it} = require("mocha");
+const { describe, it } = require("mocha");
 const expect = require("chai").expect;
-const calculateNumber = require("./2-calcul");
+const calculateNumber = require("./2-calcul_chai");
 
-describe("calculateNumber()", function () {
-    it('should return the sum of two numbers', () => {
-        expect(calculateNumber('SUM', 1, 2)).to.equal(3);
+describe("calculateNumber()", function() {
+    describe("SUM", function() {
+        it("should return 4", function() {
+            expect(calculateNumber('SUM', 1, 3)).to.equal(4);
+        });
+        it("should return 5", function() {
+            expect(calculateNumber('SUM', 1.6, 3)).to.equal(5);
+        });
     });
-
-    it('should return the difference of two numbers', () => {
-        expect(calculateNumber('SUBTRACT', 1.4, 2.2)).to.equal(-1);
+    describe("SUBTRACT", function() {
+        it("should return -2", function() {
+            expect(calculateNumber('SUBTRACT', 1, 3)).to.equal(-2);
+        });
+        it("should return -1", function() {
+            expect(calculateNumber('SUBTRACT', 1.6, 3)).to.equal(-1);
+        });
     });
-
-    it('should return the quotient of two numbers', () => {
-        expect(calculateNumber('DIVIDE', 4, 2)).to.equal(2);
-    });
-    it('should return an error message when dividing by zero', () => {
-        expect(calculateNumber('DIVIDE', 1.7, 0)).to.equal('Error');
-    });
-
-    it('should return an error message when dividing by zero', () => {
-        expect(calculateNumber('DIVIDE', 1.4, 0)).to.equal('Error');
+    describe("DIVIDE", function() {
+        it("should return 1", function() {
+            expect(calculateNumber('DIVIDE', 6, 6)).to.equal(1);
+        });
+        it("should return 2", function() {
+            expect(calculateNumber('DIVIDE', 6, 3)).to.equal(2);
+        });
+        it("should return Error", function() {
+            expect(calculateNumber('DIVIDE', 1.6, 0)).to.equal("Error");
+        });
     });
 });
