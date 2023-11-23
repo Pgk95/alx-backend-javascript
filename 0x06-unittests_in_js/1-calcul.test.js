@@ -1,24 +1,31 @@
-const assert = require('assert');
-const calculateNumber = require('./1-calcul');
-const { describe, it } = require('mocha');
+const assert = require("assert");
+const { it, describe } = require("mocha");
+const calculateNumber = require("./1-calcul");
 
-describe('calculate numbers()', () => {
-    it('should return 3 when adding 1 and 2', () => {
-        assert.equal(calculateNumber(1, 2, 'SUM'), 3);
+describe("calculateNumber()", function() {
+
+    it(`checking if numbers round`, function() {
+      const res = calculateNumber("SUM", 1, 2);
+      assert.strictEqual(res, 3);
     });
-    it('should return 2 when subtracting 6 and 8', () => {
-        assert.equal(calculateNumber(8, 6, 'SUBTRACT'), 2);
+    it(`checking if numbers round`, function() {
+      const res = calculateNumber("SUBTRACT", 1.4, 2.2);
+      assert.strictEqual(res, -1);
     });
-    it('should return -2 when subtracting 1.5 from 3.7', () => {
-        assert.equal(calculateNumber(1.5, 3.7, 'SUBTRACT'), -2);
+    it(`checking if numbers round`, function() {
+      const res = calculateNumber("SUBTRACT", 4.9, 2.7);
+      assert.strictEqual(res, 2);
     });
-    it('should return 0.14285714285714285 when dividing 1.4 by 7', () => {
-        assert.equal(calculateNumber(1.4, 7, 'DIVIDE'), 0.14285714285714285);
+    it(`checking if numbers round`, function() {
+      const res = calculateNumber("DIVIDE", 4, 2);
+      assert.strictEqual(res, 2);
     });
-    it('should return Error when dividing by 0', () => {
-        assert.equal(calculateNumber(1.4, 0, 'DIVIDE'), 'Error');
+    it(`checking if numbers round`, function() {
+      const res = calculateNumber("DIVIDE", 1.7, 0);
+      assert.strictEqual(res, "Error");
     });
-    it('should return 5 when dividing by 10 by 2', () => {
-        assert.equal(calculateNumber(10, 2, 'DIVIDE'), 5);
+    it(`checking if numbers round`, function() {
+      const res = calculateNumber("DIVIDE", 1.4, 4.6);
+      assert.strictEqual(res, 0.2);
     });
 });
