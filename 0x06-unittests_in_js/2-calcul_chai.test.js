@@ -1,6 +1,6 @@
-const assert = require("assert");
-const expect = chai.expect;
-const calculateNumber = require("./1-calcul");
+const {describe, it} = require("mocha");
+const expect = require("chai").expect;
+const calculateNumber = require("./2-calcul");
 
 describe("calculateNumber()", function () {
     it('should return the sum of two numbers', () => {
