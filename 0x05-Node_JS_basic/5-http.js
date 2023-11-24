@@ -1,40 +1,33 @@
 const http = require('http');
-const fs = require('fs');
+const countStudents = require('./3-read_file_async');
 
-const app = http.createServer((req, res) => {
-  res.setHeader('Content-Type', 'text/plain');
-
-  if (req.url === '/') {
-    res.statusCode = 200;
-    res.end('Hello Holberton School!\n');
+const app = http.createServer(async (req, res) => {
+  if (req.irl === '/') {
+    res.end('Hello Holberton School!');
   } else if (req.url === '/students') {
-    const databaseName = process.argv[2];
+    res.write('This is the list of our students\n');
 
-    if (!databaseName) {
-      res.statusCode = 500;
-      res.end('Internal Server Error: Database name is missing.\n');
-      return;
-    }
+    await countStudents(process.argv[2])
+      .then((dict) => {
+        const fields = Object.keys(dict);
+        const total = fields.reduce((acc, curr) => acc + dict[curr].numStudents, 0);
+        res.write(`Number of students: ${total}\n`);
 
-    fs.readFile(databaseName, 'utf8', (err, data) => {
-      if (err) {
-        res.statusCode = 500;
-        res.end(`Internal Server Error: ${err.message}\n`);
-      } else {
-        const lines = data.trim().split('\n').slice(1);
+        for (let x = 0; x < fields.length; x += 1) {
+          res.write(`Number of students in ${fields[x]}: ${dict[fields[x]].numStudents}. List: ${dict[fields[x]].students}. `);
+          res.write(`List: ${dict[fields[x]].names.join(', ')}`);
 
-        if (lines.length === 0) {
-          res.statusCode = 200;
-          res.end('This is the list of our students: (empty)\n');
-        } else {
-          res.statusCode = 200;
-          res.end(`This is the list of our students:\n${lines.join('\n')}\n`);
+          if (x < fields.length - 1) {
+            res.write('\n');
+          }
         }
-      }
-    });
-  } else {
-    res.statusCode = 404;
-    res.end('Not Found\n');
+      })
+      .catch((err) => {
+        res.write(err.message);
+      })
+      .finally(() => {
+        res.end();
+      });
   }
 });
 
